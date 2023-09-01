@@ -1,0 +1,190 @@
+#header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $white;
+    box-shadow: inset 0px -2px 4px -4px $black;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+.logo {
+    font: 16px/1 $cursive;
+    text-transform: uppercase;
+    border: 2px inset $russian-violet;
+    width: 100px;
+    height: 46px;
+    padding: 5px;
+    box-shadow: 1px 1px 5px $ultraviolet; 
+    text-align: center;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (min-width: $desktop) {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    &.toggle-menu {
+        /* Animate the bars when menu icon is active */
+        .bar {
+            &:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+        
+            &:nth-child(2) {
+                opacity: 0;
+            }
+        
+            &:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+        .primary-nav {
+            transform: translateX(0);
+        }
+    }
+}
+  
+  .menu-icon {
+    cursor: pointer;
+    background: $russian-violet;
+    padding: 10px;
+    height: 46px;
+    @media screen and (min-width: $desktop) {
+        display: none;
+
+    }
+  }
+  
+  .bar {
+    width: 30px;
+    height: 4px;
+    background: #fff;
+    margin: 4px 0;
+    display: block;
+    transition: background $transition-time $transition-function, transform $transition-time $transition-function;
+  }
+  
+.primary-nav {
+    margin: 0;
+    list-style: none;
+    // display: none;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background: $ultraviolet;
+    right: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(9999px);
+    transition: transform $transition-time $transition-function;
+    @media screen and (min-width: $desktop) {
+        position: static;
+        transform: translateX(0);
+        display: flex;
+        margin: 0 -5px;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    > li {
+        border-bottom: 1px solid $white;
+        text-transform: capitalize;
+        position: relative;
+        @media screen and (min-width: $desktop) {
+            border: none;
+            margin: 0 5px;
+        }
+        &.active,
+        &:hover {
+            > a {
+                background: $saffron;
+            }
+        }
+        &:hover {
+            > .secondary-nav {
+                display: block;
+            }
+        }
+        &.active {
+            > a {
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+        > a {
+            color: $white;
+            display: block;
+            padding: 10px;
+            background: $ultraviolet;
+            &:hover {
+                background: $saffron;
+            }
+        }
+        > .secondary-nav {
+            list-style: none;
+            background: $russian-violet;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            @media screen and (min-width: $desktop) {
+                left: -50%;
+                width: 180px;
+                margin-left: -20px;
+                top: 52px;
+            }
+            &:before {
+                content: '';
+                width: 0; 
+                height: 0; 
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;      
+                border-bottom: 10px solid $russian-violet;
+                position: absolute;
+                top: auto;
+                bottom: 100%;
+                left: 50%;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: 100%;
+                top: auto;
+                left: 0;
+                right: 0;
+                height: 12px;
+                background: transparent;
+            }
+            > li {
+                &.active,
+                &:hover {
+                    > a {
+                        background: lighten($saffron,10%);
+                    }
+                }
+                > a {
+                    color: $white;
+                    display: block;
+                    padding: 10px;
+                    &:hover {
+                        background: lighten($saffron,10%);
+                    }
+                }
+            }
+        }
+    }
+}
+  
+  @media screen and (min-width: 768px) {
+    .menu-icon {
+    //   display: none;
+    }
+  }
+  

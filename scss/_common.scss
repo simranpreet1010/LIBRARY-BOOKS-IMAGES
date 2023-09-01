@@ -1,0 +1,20 @@
+.btn {
+	background: $saffron;
+	padding: 10px 15px;
+	border-radius: $border-radius;
+	font: 16px/1.2 $permanent-marker;
+	&:hover {
+		background: darken($saffron, 10%);
+	}
+}
+
+.holder {
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.d-flex {
+	display: flex;
+	justify-content: space-between;
+}
