@@ -7,9 +7,9 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 <!-- css styles url goes here -->
 <link rel="stylesheet" href="css/all.css">
-<script defer src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script defer src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script defer src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script defer src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script defer src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- js scripts url goes here -->
 <script defer src="js/page_starter.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>

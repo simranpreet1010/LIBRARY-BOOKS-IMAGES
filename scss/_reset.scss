@@ -31,3 +31,39 @@ img {
 	max-width: 100%;
 	vertical-align: top;
 }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+	border: none;
+	border-bottom: 1px dashed $russian-violet;
+	padding: 10px;
+	font: 400 16px/20px $font-family;
+	height: 30px;
+	background: none;
+	width: 100%;
+	color: $russian-violet;
+	outline: none;
+	transition: border $transition-time $transition-function;
+	&:focus {
+		border: none;
+		border-bottom: 1px dashed $saffron;
+	}
+}
+
+input[type="button"],
+button[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	background: $saffron;
+	padding: 10px 15px;
+	border-radius: $border-radius;
+	font: 16px/1.2 $permanent-marker;
+	border: none;
+	cursor: pointer;
+	transition: background $transition-time $transition-function;
+	&:hover {
+		background: darken($saffron, 10%);
+	}
+}
