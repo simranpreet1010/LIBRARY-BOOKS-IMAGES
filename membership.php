@@ -20,9 +20,31 @@
 							<li>Online access to digital resources and e-books.</li>
 							<li>Invitations to library events and workshops.</li>
 						</ul>
+						<form action="include/db/login.php" method="POST">
+							<h2>Already a member?</h2>
+							<div class="input-row">
+								<div class="label-wrap">
+									<label for="login_id">Student Id</label>
+								</div>
+								<input type="number" id="login_id" name="login_id">
+							</div>
+							<div class="input-row">
+								<div class="label-wrap">
+									<label for="login_pwd">Password</label>
+								</div>
+								<input type="number" id="login_pwd" name="login_pwd">
+							</div>
+							<div class="input-row">
+								<input type="submit" value="Login">
+								<div class="sub-row">
+									<a href="#">Forgot Password?</a>
+								</div>
+							</div>
+							
+						</form>
 					</aside>
 					<div class="side-column">
-						<form action="include/db/submit-membership.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm();">
+						<form action="include/db/submit-membership.php" method="POST" autocomplete="off" enctype="multipart/form-data" onsubmit="return validateForm();">
 							<div class="input-row">
 								<div class="label-wrap">
 									<label for="id">Student Id</label>

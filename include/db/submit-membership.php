@@ -27,7 +27,7 @@
     echo "<pre>";
     print_r ($photo);
     echo "</pre>";
-    /*require_once "config.php";
+    require_once "config.php";
     $tblnameMembership = "tblMembership";
     $tblnamePhoto = "tblmemberphoto";
     
@@ -50,6 +50,6 @@
     
     // Close the database connection
     mysqli_close($conn);
-    */
+    
     
 ?>
