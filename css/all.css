@@ -157,6 +157,13 @@ form label {
 		font-weight: 700;
 }
 
+.error {
+		color: #e54f6d;
+}
+.error h2 {
+		color: #451f55;
+}
+
 .door-wrapper {
 		position: relative;
 		overflow: hidden;

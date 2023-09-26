@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +15,11 @@
 	    	<div class="content-holder">
 				<div class="text-wrap">
 					<h1>Welcome to <span class="project-title">Win Library</span></h1>
+					<?php 
+						if (isset($_SESSION["id"])) {
+							echo "<h2>Student ID: ".$_SESSION['id']."</h2>";
+						}
+					?>
 					<p>Explore our collection of books.</p>
 				</div>
 			  	<a class="btn btn-primary" id="btnAccess" href="javascript:void(0);">Click to Enter</a>
@@ -23,7 +32,11 @@
 			<?php require_once 'include/header.php' ?>
 			<div class="holder">
 				<div class="text-wrap">
-					<h1>Welcome to <span class="project-title">Win Library</span></h1>
+					<h1><?php 
+						if (isset($_SESSION["sName"])) {
+							echo $_SESSION['sName'].", ";
+						}
+					?>Welcome to <span class="project-title">Win Library</span></h1>
 					<p>Explore our collection of books.</p>
 				</div>
 				<div class="slick-carousel">

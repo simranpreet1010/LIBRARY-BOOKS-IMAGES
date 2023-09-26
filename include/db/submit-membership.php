@@ -1,55 +1,69 @@
 <?php
-    $id = $_REQUEST['id'];
-    $name = $_REQUEST['name'];
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
-    $phone = $_REQUEST['phone'];
-    $photo = $_FILES['photo'];
-    $photo_name = $photo['name'];
-    $photo_type = $photo['type'];
-    $photo_tmpname = $photo['tmp_name'];
-    $photo_error = $photo['error'];
-    $photo_size = $photo['size'];
+    if(isset($_REQUEST['submit'])) {
+        // request for data submitted via. membership forms' name
+        $id = $_REQUEST['id'];
+        $name = $_REQUEST['name'];
+        $email = $_REQUEST['email'];
+        $password = $_REQUEST['password'];
+        $confirmPassword = $_REQUEST['cpassword'];
+        $phone = $_REQUEST['phone'];
+        // require database connection
+        require_once "config.php";
+        // require error handlers for form validation
+        require_once "../fn/validation.php";
 
-    if ($photo_error == 0) {
-        if ($photo_size > 1000000) {
-            $em = "Sorry, your file is too large.";
-            header("Location: membership.php?error=$em");
+        // anything beside false
+        if(emptyInputMembership($id, $name, $email, $password, $confirmPassword, $phone) !== false) {
+            header("location: ../../membership.php?error=emptyinput");
+            exit(); // stop script from running
         }
-        else {
-            $photo_ext = pathinfo($photo_name, PATHINFO_EXTENSION); //returns information about a file path
-            echo ($photo_ext);
-
+        if(invalidUsername($name) !== false) {
+            header("location: ../../membership.php?error=invalidUsername");
+            exit(); // stop script from running
+        }
+        if(invalidEmail($email) !== false) {
+            header("location: ../../membership.php?error=invalidEmail");
+            exit(); // stop script from running
+        }
+        if(pwdMatch($password, $confirmPassword) !== false) {
+            header("location: ../../membership.php?error=passwordmismatched");
+            exit(); // stop script from running
+        }
+        if(userIDExists($conn, $id, $email) !== false) {
+            header("location: ../../membership.php?error=userIDtaken");
+            exit(); // stop script from running
         }
 
-    }
-    
-    echo "<pre>";
-    print_r ($photo);
-    echo "</pre>";
-    require_once "config.php";
-    $tblnameMembership = "tblMembership";
-    $tblnamePhoto = "tblmemberphoto";
-    
-    $query1 = "INSERT INTO $tblnameMembership 
-            (`studentID`, `studentName`, `email`, `password`, `phoneNumber`, `photo`) 
+        // after form validation
+        createMember($conn, $id, $name, $email, $password, $phone);
+/*
+        
+        $tblnameMembership = "tblMembership";
+        $tblnamePhoto = "tblmemberphoto";
+        
+        
+        $query1 = "INSERT INTO $tblnameMembership 
+                (`studentID`, `studentName`, `email`, `password`, `phoneNumber`) 
+                VALUES 
+                ($id, '$name',  '$email', '$password', $phone);";
+        $query2 = "INSERT INTO $tblnamePhoto 
+            (`studentID`) 
             VALUES 
-            ($id, '$name',  '$email', '$password', $phone, '$photo');";
-    $query2 = "INSERT INTO $tblnamePhoto 
-        (`studentID`, `photoURL`) 
-        VALUES 
-        ($id, '$photo');";
-            //$query = "INSERT INTO `tblmembership` (`studentID`, `studentName`, `email`, `password`, `phoneNumber`, `photoID`, `photo`) VALUES ('984797', 'Anup Maharjan', '984796@win.edu.au', 'anup', '12121', NULL, 'test.jpg');";
-    //$conn is the variable for the connection which is generated from config.php file
-    if(mysqli_query($conn, $query1) && mysqli_query($conn, $query2)) 
-    {
-        echo "New membership created successfully";
-    } else {
-        echo "Error: " . $query1. "<br>" . $query2. "<br>". mysqli_error($conn);
+            ($id);";
+                //$query = "INSERT INTO `tblmembership` (`studentID`, `studentName`, `email`, `password`, `phoneNumber`, `photoID`, `photo`) VALUES ('984797', 'Anup Maharjan', '984796@win.edu.au', 'anup', '12121', NULL, 'test.jpg');";
+        //$conn is the variable for the connection which is generated from config.php file
+        if(mysqli_query($conn, $query1) && mysqli_query($conn, $query2)) 
+        {
+            echo "New membership created successfully";
+        } else {
+            echo "Error: " . $query1. "<br>" . $query2. "<br>". mysqli_error($conn);
+        }
+        
+        // Close the database connection
+        mysqli_close($conn);
+        */
     }
-    
-    // Close the database connection
-    mysqli_close($conn);
-    
-    
-?>
+    else {
+        header("location: ../../membership.php");
+        exit();
+    }

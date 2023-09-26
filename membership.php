@@ -13,35 +13,9 @@
 				</div>
 				<div class="column-block">
 					<aside class="side-column left-push">
-						<h2>Membership Benefits</h2>
-						<ul>
-							<li>Access to a vast collection of books.</li>
-							<li>Extended borrowing privileges.</li>
-							<li>Online access to digital resources and e-books.</li>
-							<li>Invitations to library events and workshops.</li>
-						</ul>
-						<form action="include/db/login.php" method="POST">
-							<h2>Already a member?</h2>
-							<div class="input-row">
-								<div class="label-wrap">
-									<label for="login_id">Student Id</label>
-								</div>
-								<input type="number" id="login_id" name="login_id">
-							</div>
-							<div class="input-row">
-								<div class="label-wrap">
-									<label for="login_pwd">Password</label>
-								</div>
-								<input type="number" id="login_pwd" name="login_pwd">
-							</div>
-							<div class="input-row">
-								<input type="submit" value="Login">
-								<div class="sub-row">
-									<a href="#">Forgot Password?</a>
-								</div>
-							</div>
-							
-						</form>
+						<?php require_once 'include/membership-benefits.php' ?>
+						<h2>Already a member?</h2>
+						<a href="member-login.php" class="btn">Log in</a>
 					</aside>
 					<div class="side-column">
 						<form action="include/db/submit-membership.php" method="POST" autocomplete="off" enctype="multipart/form-data" onsubmit="return validateForm();">
@@ -81,16 +55,44 @@
 								</div>
 								<input type="number" id="phone" name="phone" >
 							</div>
-							<div class="input-row">
+							<!--div class="input-row">
 								<div class="label-wrap">
 									<label for="photo">Photo</label>
 								</div>
 								<input type="file" id="photo" name="photo">
-							</div>
+							</div-->
 							<div class="input-row">
-								<input type="submit" value="Become a member">
+								<input type="submit" name="submit" value="Become a member">
 							</div>
 						</form>
+						<?php
+							if(isset($_REQUEST["error"])) {
+								echo "<div class='error'>";
+								if($_REQUEST["error"] == "emptyinput") {
+									echo "<p>Fill in all fields!</p>";
+								}
+								elseif($_REQUEST["error"] == "invalidUsername") {
+									echo "<p>Choose a proper username!</p>";
+								}
+								elseif($_REQUEST["error"] == "invalidEmail") {
+									echo "<p>Choose a proper email!</p>";
+								}
+								elseif($_REQUEST["error"] == "passwordmismatched") {
+									echo "<p>Password Mismatched!</p>";
+								}
+								elseif($_REQUEST["error"] == "userIDtaken") {
+									echo "<p>Student ID or Email already taken!!</p>";
+								}
+								elseif($_REQUEST["error"] == "stmtfailed") {
+									echo "<p>Oops! Something went wront, try again!!</p>";
+								}
+								
+								elseif($_REQUEST["error"] == "none") {
+									echo "<h2>Thankyou for joining WIN Library Membership.</h2>";
+								}
+								echo "</div>";
+							}
+						?>
 					</div>
 				</div>
 		  	</div>
