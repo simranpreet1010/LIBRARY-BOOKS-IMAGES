@@ -1,0 +1,64 @@
+.btn {
+	background: $saffron;
+	padding: 10px 15px;
+	border-radius: $border-radius;
+	font: 16px/1.2 $permanent-marker;
+	transition: background $transition-time $transition-function;
+	&:hover {
+		background: darken($saffron, 10%);
+	}
+}
+
+.holder {
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.d-flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column-block {
+	@media (min-width: $tablet) {
+		display: flex;
+		flex-flow: row wrap;
+	}
+	.side-column {
+		@media (min-width: $tablet) {
+			flex: 1;
+		}
+		&.left-push {
+			@media (min-width: $tablet) {
+				flex-basis: 30%;
+				max-width: 30%;
+			}
+		}
+		+ .side-column {
+			position: relative;
+			padding-left: 5%;
+			margin-left: 5%;
+			&:before {
+				content: '';
+				position: absolute;
+				width: 1px;
+				height: 60%;
+				background: $russian-violet;
+				top: 50%;
+				left: 0;
+				transform: translateY(-50%);
+	
+			}
+		}
+	}
+}
+
+form {
+	.input-row {
+		margin-bottom: 15px;
+	}
+	label {
+		font-weight: 700;
+	}
+}

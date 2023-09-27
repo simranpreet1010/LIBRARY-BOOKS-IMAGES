@@ -1,0 +1,80 @@
+.door-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.door {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: $russian-violet;
+  perspective: 1000px;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: $ultraviolet;
+    transform-origin: left;
+    transform: rotateY(0deg) translateZ(1px);
+  }
+}
+
+.door-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: $white;
+  font-size: 20px;
+  h1 {
+    font-family: $cursive;
+    text-transform: uppercase;
+    font-size: 60px;
+  }
+  .project-title {
+    display: block;
+    color: $black;
+  }
+  .text-wrap {
+    margin-bottom: 50px;
+  }
+}
+
+.door-handle {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 40px;
+  height: 10px;
+  background: #f39c12;
+  transform: translateX(-50%);
+  border-radius: 5px;
+}
+
+.main-content {
+  // text-align: center;
+  // margin-top: 20px;
+  // transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+  overflow: hidden;
+  width:100%;
+  height:100%;
+  display:table; 
+  margin:0 auto;
+}
+
+.startup-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+}

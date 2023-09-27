@@ -1,0 +1,28 @@
+/* Styles for the Our Team section */
+#our-team {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.team-member {
+    text-align: center;
+    margin: 20px;
+}
+
+.team-member img {
+    max-width: 50px; /* Adjust the maximum width as needed */
+    height: 50px; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below images */
+    margin: 0 auto 10px; /* Center images and add margin at the bottom */
+    border-radius: 50%; /* Make the images circular */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+
+.team-member h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.team-member p {
+    font-size: 14px;
+}
