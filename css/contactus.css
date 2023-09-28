@@ -1,0 +1,14 @@
+/* styles.css */
+.contact {
+    text-align: center; /* Center-align the content */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add some spacing around the content */
+}
+
+.contact {
+    max-width: 800px; /* Set a maximum width for the content */
+    margin: 0 auto; /* Center the content within the max-width container */
+    padding: 20px; /* Add some spacing around the content */
+}
+
+/* Adjust the styles as needed to achieve the desired layout and appearance. */

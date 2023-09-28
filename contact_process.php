@@ -1,32 +1,38 @@
-<?php 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+<?php
+// Database credentials
+$servername = "localhost"; // Replace with your database server name
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$database = "feedback"; // Replace with your database name
 
-require 'vendor/autoload.php'; // Adjust the path to autoload.php as needed
+// Create a database connection
+$conn = new mysqli($servername, $username, $password, $database);
 
-$mail = new PHPMailer(true);
-
-try {
-    //Server settings
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com'; // Your SMTP server
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'raz.kharel.3363@gmail.com';    // Your SMTP username
-    $mail->Password   = 'Nep@l123';    // Your SMTP password
-    $mail->SMTPSecure = 'tls';              // Enable TLS encryption
-    $mail->Port       = 587;                // TCP port to connect to (587 for TLS)
-
-    //Recipients
-    $mail->setFrom('your_email@example.com', 'Your Name');
-    $mail->addAddress('recipient@example.com', 'Recipient Name');
-
-    // Content
-    $mail->isHTML(true);
-    $mail->Subject = 'Test Email';
-    $mail->Body    = 'This is a test email sent via PHPMailer.';
-
-    $mail->send();
-    echo 'Email sent successfully!';
-} catch (Exception $e) {
-    echo "Email sending failed: {$mail->ErrorInfo}";
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    // Insert feedback into the database
+    $sql = "INSERT INTO feedback_details (Name, Email, Message) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $name, $email, $message);
+
+    if ($stmt->execute()) {
+        echo "Thank you for your feedback!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+// Close the database connection
+$conn->close();
+?>

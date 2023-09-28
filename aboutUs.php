@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<link rel="stylesheet" type="text/css" href="css/aboutus.css">
 	<?php require_once 'include/head-block.php' ?>
-	<link rel="stylesheet" href="css/aboutus.css">
-
 </head>
 <body>
 	<div class="main-content">
@@ -22,23 +20,23 @@
    	 				<div class="team-member">
         				<img src="images/anup.jpg" alt="Anup Maharjan">
         				<h3>Anup Maharjan</h3>
-        				<p>Librarian's role and expertise.</p>
+        				<p>Team Member</p>
    	 				</div>
    	 				<div class="team-member">
         				<img src="images/Aishwariya.jpg" alt="Aishwariya Reddy">
         				<h3>Aishwariya Reddy</h3>
-        				<p>Librarian's role and expertise.</p>
+        				<p>Team Member</p>
    	 				</div>
-						<div class="team-member">
+					<div class="team-member">
         				<img src="images/Simran.jpg" alt="Simran Preet Kaur">
         				<h3>Simran Preet Kaur</h3>
-        				<p>Librarian's role and expertise.</p>
+        				<p>Team Member</p>
    	 				</div>
-						</div>
-						<div class="team-member">
+		
+					<div class="team-member">
         				<img src="images/Raj.jpg" alt="Raj Kharel">
         				<h3>Raj Kharel</h3>
-        				<p>Librarian's role and expertise.</p>
+        				<p>Team Member</p>
    	 				</div>
     
 				</section>
