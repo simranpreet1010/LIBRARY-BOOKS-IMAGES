@@ -15,8 +15,8 @@
 					<h1><span class="project-title">My Profile</span></h1>
 				</div>
 				<?php 
-					require_once "include/db/config.php";
-					require_once "include/fn/validation.php";
+					require "include/db/config.php";
+					require "include/fn/validation.php";
 					if (isset($_SESSION["id"])) {
 						$sid = $_SESSION["id"];
 						echo "<form class='update-form' action='update-membership.php'>";
@@ -50,6 +50,38 @@
 								';
 							}
 						echo "</form>";
+					}
+					if (isset($_SESSION['borrowed'])) {
+						$resultData = displayBorrowedBook($conn);
+						// Check if there are borrowed books
+						if (mysqli_num_rows($resultData) > 0) {
+							echo "<h1>Borrowed Books</h1>";
+							echo "<table border='1'>";
+							echo "<tr><th>Book ID</th><th>Book Title</th><th>Author name</th><th>Borrow Date</th><th>Return Date</th></tr>";
+
+							while ($row = mysqli_fetch_assoc($resultData)) {
+								echo "<tr>";
+								echo "<td>" . $row['bookID'] . "</td>";
+								echo "<td>" . $row['Title'] . "</td>";
+								echo "<td>" . $row['Author name'] . "</td>";
+								echo "<td>" . $row['borrowDate'] . "</td>";
+								echo "<td>" . $row['returnDate'] . "</td>";
+								echo "</tr>";
+							}
+
+							echo "</table>";
+						} else {
+							echo "No books are currently borrowed.";
+						}
+
+						echo "
+							<h1>Return a Book</h1>
+							<form action='include/db/return.inc.php' method='POST'>
+								<label for='bookID'>Enter Book ID:</label>
+								<input type='text' name='bookID' required>
+								<input type='submit' name='btnReturn' value='Return'>
+							</form>
+						";
 					}
 
                 ?>

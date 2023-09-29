@@ -38,6 +38,8 @@
 						}
 					?>Welcome to <span class="project-title">Win Library</span></h1>
 					<p>Explore our collection of books.</p>
+					<p>At Win-Library, we believe in the power of knowledge, exploration, and community. Our library aims to be a cornerstone of this vibrant 
+					community , providing a rich resource for learning, discovery, and connection.</p>
 				</div>
 				<div class="slick-carousel">
 					<div class="slide">

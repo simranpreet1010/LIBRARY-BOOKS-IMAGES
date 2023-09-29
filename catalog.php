@@ -64,7 +64,7 @@
 							<td>" . $_SESSION["Publication"] . "</td>
 							<td>" . $_SESSION["Edition"] . "</td>
 							<td>" . $_SESSION["ISBN"] . "</td>
-						</tr>";					
+						</tr>";
 					}
 					else {
 						if (mysqli_num_rows($result) > 0) {
@@ -84,7 +84,26 @@
 						}
 					}
 					echo "</table>";
-					
+					if (isset($_SESSION["stock"])) {
+						if ($_SESSION["stock"]> 0) {
+							echo "<form action='include/db/borrow.inc.php' method='POST'>
+							<input type='hidden' name='bookID' value='" . $_SESSION["bookID"] . "'>
+							<input type='hidden' name='studentID' value='" . $_SESSION["id"] . "'>
+							<input type='submit' name='btnBorrow' value='Borrow'>
+							</form>";
+							if(isset($_REQUEST["msg"])) {
+								
+								if($_REQUEST["msg"] == "bookborrowsuccess") {
+									echo "<div class='success'><p>Book borrowed successfully.</p></div>";
+									echo "<a href='profile.inc.php' class='btn'>View your profile</a>";
+								}
+								
+							}
+						}
+						else {
+							echo "<p class='error'>Book ID ".$_SESSION['bookID']." is currently not availalbe to borrow";
+						}
+					}
 				}
 				?>
 		  	</div>

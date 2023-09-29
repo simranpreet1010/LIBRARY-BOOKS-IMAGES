@@ -12,7 +12,7 @@
         }
 
         searchRecord($conn, $search_key, $tblName);
-
+      
    }
     else {
         header("location: ../../catalog.php");
