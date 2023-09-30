@@ -51,39 +51,56 @@
 							}
 						echo "</form>";
 					}
-					if (isset($_SESSION['borrowed'])) {
-						$resultData = displayBorrowedBook($conn);
+					// if (isset($_SESSION['borrowed'])) {
+						$studentID = $_SESSION["id"];
+						$resultData = displayBorrowedBook($conn, $studentID);
 						// Check if there are borrowed books
 						if (mysqli_num_rows($resultData) > 0) {
 							echo "<h1>Borrowed Books</h1>";
 							echo "<table border='1'>";
-							echo "<tr><th>Book ID</th><th>Book Title</th><th>Author name</th><th>Borrow Date</th><th>Return Date</th></tr>";
+							echo "<tr><th>Book ID</th><th>Student Name</th><th>Book Title</th><th>Author name</th><th>Borrow Date</th><th>Return Date</th><th>Due Date</th><th>Fine</th></tr>";
 
 							while ($row = mysqli_fetch_assoc($resultData)) {
 								echo "<tr>";
 								echo "<td>" . $row['bookID'] . "</td>";
+								echo "<td>" . $row['studentName'] . "</td>";
 								echo "<td>" . $row['Title'] . "</td>";
 								echo "<td>" . $row['Author name'] . "</td>";
 								echo "<td>" . $row['borrowDate'] . "</td>";
 								echo "<td>" . $row['returnDate'] . "</td>";
+								echo "<td>" . $row['dueDate'] . "</td>";
+								echo "<td>" . $row['Fine'] . "</td>";
 								echo "</tr>";
 							}
 
 							echo "</table>";
+							echo "
+								<h1>Return a Book</h1>
+								<p>ATTENTION: <mark>Return book by due date. Otherwise, there will be the fine of $5/day.</mark></p>
+								<form action='include/db/return.inc.php' method='POST'>
+									<label for='bookID'>Enter Book ID:</label>
+									<input type='text' name='bookID' required>
+									<input type='hidden' name='dueDate' value='".date('Y-m-d', strtotime('-2 weeks'))."'>
+									<input type='submit' name='btnReturn' value='Return'>
+								</form>
+								
+							";
 						} else {
-							echo "No books are currently borrowed.";
+							echo "<h2>No books are currently borrowed.</h2>";
 						}
-
-						echo "
-							<h1>Return a Book</h1>
-							<form action='include/db/return.inc.php' method='POST'>
-								<label for='bookID'>Enter Book ID:</label>
-								<input type='text' name='bookID' required>
-								<input type='submit' name='btnReturn' value='Return'>
-							</form>
-						";
+					// }
+					if (isset($_REQUEST['updatereturn'])) {
+						if ($_REQUEST['updatereturn']=='success') {
+							echo "<p>Book with ID ". $_SESSION['bookID'] ." has been successfully returned on " .$_SESSION['returnDate']."</p>";
+						}
+						elseif ($_REQUEST['updatereturn']=='fail') {
+							echo "Error updating return: " . mysqli_error($conn);
+						}
+						elseif ($_REQUEST['updatereturn']=='neutral') {
+							echo "<p>Book with ID ". $_SESSION['bookID'] ." is not currently borrowed by " .$_SESSION['id']."</p>";
+						}
 					}
-
+					
                 ?>
 		  	</div>
 		</div>

@@ -14,7 +14,7 @@
 
     function invalidUsername($name) {
         $result;
-        if(!preg_match("/^[a-zA-Z0-9]*$/", $name)) {
+        if(!preg_match("/^[a-zA-Z 0-9]*$/", $name)) {
             $result = true;
         }
         else {
@@ -236,12 +236,12 @@
         $bookID = $_REQUEST['bookID'];
         // Get the current date
         $borrowDate = date('Y-m-d');
-        $returnDate = date('Y-m-d', strtotime('+2 weeks')); // Set return date after 2 weeks
+        // $returnDate = date('Y-m-d', strtotime('+2 weeks')); // Set return date after 2 weeks
         // Check if the return date has exceeded the due date
-        //$dueDate = date('Y-m-d', strtotime('-2 weeks')); // Calculate due date (2 weeks ago)
+        $dueDate = date('Y-m-d', strtotime('+2 weeks')); // Calculate due date (2 weeks ago)
 
         // Insert a new borrowing record
-        $insertQuery = "INSERT INTO tblBorrowBooks (studentID, bookID, borrowDate, returnDate) VALUES ($studentID, $bookID, '$borrowDate', '$returnDate')";
+        $insertQuery = "INSERT INTO tblBorrowBooks (studentID, bookID, borrowDate, dueDate) VALUES ($studentID, $bookID, '$borrowDate', '$dueDate')";
 
         if (mysqli_query($conn, $insertQuery)) {
             // Update book availability (assuming you have a 'books' table)
@@ -261,14 +261,7 @@
                 $_SESSION['borrowed'] = true;
                  
                 
-               /* if ($returnDate > $dueDate) {
-                    // Calculate the fine amount (e.g., $5 per day late)
-                    $daysLate = (strtotime($returnDate) - strtotime($dueDate)) / (60 * 60 * 24);
-                    $fineAmount = $daysLate * 5; // fine amount $5/day
-                    $updateQuery = "UPDATE library SET fine = $fineAmount WHERE bookID = $bookID";
-                    if (mysqli_query($conn, $updateQuery)) {
-                        echo "Due date and fine amount is set";
-                    }*/
+               
                     
                 } else {
                     echo "Error updating book availability: " . mysqli_error($conn);
@@ -279,11 +272,12 @@
 
          }
 
-         function displayBorrowedBook($conn) {
+         function displayBorrowedBook($conn, $studentID) {
             // SQL query to select borrowed books
-            $selectQuery = "SELECT l.*, b.*
+            $selectQuery = "SELECT l.*, b.*,m.*
                 FROM tblborrowbooks AS b
-                JOIN library AS l ON b.bookID = l.bookID";
+                JOIN library AS l ON b.bookID = l.bookID
+                JOIN tblmembership AS m ON b.studentID = m.studentID where b.studentID = ".$studentID;
                 $result = mysqli_query($conn, $selectQuery);
                 if (!$result) {
                     die("Error retrieving borrowed books: " . mysqli_error($conn));
@@ -291,13 +285,16 @@
                 return $result;
          }
 
-         function borrowBook($conn) {
+         function returnBook($conn) {
             // Get data from the form submission
             $bookID = $_REQUEST['bookID'];
+            $dueDate = $_REQUEST['dueDate'];
 
             // Check if the book is borrowed by the user
             $checkBorrowQuery = "SELECT * FROM tblborrowbooks WHERE bookID = $bookID AND returnDate IS NULL";
             $result = mysqli_query($conn, $checkBorrowQuery);
+          
+                
 
             if (mysqli_num_rows($result) > 0) {
                 // The book is borrowed by the user and not yet returned
@@ -305,17 +302,29 @@
                 // Update the return date to the current date
                 $returnDate = date('Y-m-d');
 
-                $updateReturnQuery = "UPDATE tblborrowbooks SET returnDate = '$returnDate' WHERE bookID = $bookID AND returnDate IS NULL";
+
+                if (!($returnDate > $dueDate)) {
+                    $updateReturnQuery = "UPDATE tblborrowbooks SET returnDate = '$returnDate' WHERE bookID = $bookID AND returnDate IS NULL";
+                }
+                else {
+                    // Calculate the fine amount (e.g., $5 per day late)
+                    $daysLate = (strtotime($returnDate) - strtotime($dueDate)) / (60 * 60 * 24);
+                    $fineAmount = $daysLate * 5; // fine amount $5/day
+                    $updateReturnQuery = "UPDATE tblborrowbooks SET returnDate = '$returnDate', fine = $fineAmount WHERE bookID = $bookID AND returnDate is NULL";
+
+                }
+
 
                 if (mysqli_query($conn, $updateReturnQuery)) {
-                    echo "Book with ID $bookID has been successfully returned on $returnDate.";
+                    header("location: ../../profile.inc.php?updatereturn=success");
                 } else {
-                    echo "Error updating return date: " . mysqli_error($conn);
+                    header("location: ../../profile.inc.php?updatereturn=fail");
                 }
             } else {
+                header("location: ../../profile.inc.php?updatereturn=neutral");
                 // The book is not borrowed by the user or has already been returned
-                echo "The book with ID $bookID is not currently borrowed by you.";
             }
+
 
         }
                 

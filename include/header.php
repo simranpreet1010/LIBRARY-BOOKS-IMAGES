@@ -12,16 +12,15 @@
             <ul class="primary-nav hidden" id="primary-nav">
                 <li <?php echo isActive("index.php"); ?>><a href="index.php">Home</a></li>
                 <li <?php echo isActive("aboutUs.php"); ?>><a href="aboutUs.php">About Us</a></li>
+                <li <?php echo isActive("contactUs.php"); ?>><a href="contactUs.php">Contact Us</a></li>
                 <?php
                     if (isset($_SESSION["id"])) {
                         echo '
                         <li isActive("catalog.php");>
                             <a href="catalog.php">Catalog</a>
                             <ul class="secondary-nav">
-                                <li isActive("availableBooks.php");><a href="availableBooks.php">Available books</a></li>
-                                <li isActive("newArrivals.php");><a href="newArrivals.php">New arrivals</a></li>
-                                <li isActive("categories.php");><a href="categories.php">Categories</a></li>
-                                <li isActive("digitalResources.php");><a href="digitalResources.php">Digital resources</a></li>
+                                <li isActive("newArrivals.php");><a href="under-construction.php">New arrivals</a></li>
+                                <li isActive("digitalResources.php");><a href="under-construction.php">Digital resources</a></li>
                             </ul>
                         </li>
                         <li isActive("profile.php");><a href="profile.inc.php">My Profile</a></li>
@@ -30,9 +29,10 @@
                     }
                     else {
                         echo '<li isActive("membership.php");><a href="membership.php">membership</a></li>';
+                        echo '<li isActive("member-login.php");><a href="member-login.php">Log in</a></li>';
                     }
                 ?>
-                <li <?php echo isActive("contactUs.php"); ?>><a href="contactUs.php">Contact Us</a></li>
+                
             </ul>
         </nav>
   </div>

@@ -2,7 +2,7 @@
     if(isset($_POST["btnReturn"])) {
     require_once "config.php";
     require_once "../fn/validation.php";
-    borrowBook($conn);
+    returnBook($conn);
 }
 else {
     header("location: ../../profile.inc.php");

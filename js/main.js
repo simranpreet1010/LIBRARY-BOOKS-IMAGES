@@ -13,19 +13,25 @@ function initMenuToggle() {
         slidesToShow: 3,
         dots: true,
         infinite: true,
-        slidesToScroll: 1,
+        slidesToScroll: 3,
         arrows: false,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 2000,
+        centerMode: false,
+        centerPadding: '40px',
         responsive: [
             {
-              breakpoint: 768,
+              breakpoint: 1024,
               settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
               }
             },
             {
-              breakpoint: 480,
+              breakpoint: 768,
               settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
               }
             }
           ]

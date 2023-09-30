@@ -20,6 +20,10 @@
 	justify-content: space-between;
 }
 
+.align-center {
+	text-align: center;
+}
+
 .column-block {
 	@media (min-width: $tablet) {
 		display: flex;

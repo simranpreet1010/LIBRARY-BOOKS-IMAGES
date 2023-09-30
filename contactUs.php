@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/contactus.css"> <!-- Link to your CSS file -->
+
 	<?php require_once 'include/head-block.php' ?>
 </head>
 <body>
 	<div class="main-content">
 		<div class="inner-main">
 			<?php require_once 'include/header.php' ?>
-		
+		<div class=contact>
     <section id="contact-info">
         <h2>Contact Us</h2>
-        <p><strong>Raj Kharel</strong></p>
-        <p>Address: Woniora rd, Hurstville,NSW</p>
-        <p>Phone: +61426956683</p>
-        <p>Email: <a href="mailto:[raz.kharel.3363@gmail.com]">raz.kharel.3363@gmail.com</a></p>
+        <p><strong>Simranpreet Kaur : 984708@win.edu.au</strong></p>
+
+        <p><strong>Anup Maharjan : 984796@win.edu.au</strong></p>
+
+        <p><strong>Aishwariya Reddy : 983785@win.edu.au</strong></p>
+        <p><strong>Raj Kharel : 984949@win.edu.au</strong></p>
+
     </section>
+<br>
+    <p>Please take a moment to fill out our 'Contact Us' form below. We value your feedback and inquiries, and we'll get back to you as soon as possible.</p>
 
-    <section id="contact-form">
-        <h2>Contact Form</h2>
-        <form action="contact_process.php" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    <form method="POST" action="contact_process.php"> <!-- Assuming you named the PHP script send_sms.php -->
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required><br><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required><br><br>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
+        <label for="message">Message:</label>
+        <textarea name="message" id="message" rows="7" required></textarea><br><br><br>
 
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+        <input type="submit" value="Submit">
+    </form>
 
-
+    </div>
 		</div>
 	  <?php require_once 'include/footer.php' ?>
 	</div>
