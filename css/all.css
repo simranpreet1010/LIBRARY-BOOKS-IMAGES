@@ -52,6 +52,7 @@ input[type=number] {
 		outline: none;
 		-webkit-transition: border 400ms ease-in-out;
 		transition: border 400ms ease-in-out;
+		margin-bottom: 5px;
 }
 input[type=text]:focus,
 input[type=email]:focus,
@@ -79,6 +80,31 @@ button[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
 		background: #edb408;
+}
+
+table {
+		border: 1px inset #fff;
+		margin: 20px 0;
+		border-collapse: collapse;
+		width: 100%;
+		table-layout: auto;
+		word-break: break-all;
+}
+table:nth-col(1) {
+		background: #22162b;
+}
+table th, table td {
+		padding: 5px;
+}
+table thead tr {
+		background: #22162b;
+		color: #fff;
+}
+table tbody tr:nth-child(odd) {
+		background: #8c66ac;
+}
+table tbody tr:nth-child(even) {
+		background: #a587be;
 }
 
 .btn {
@@ -159,6 +185,14 @@ form .input-row {
 }
 form label {
 		font-weight: 700;
+}
+
+.search-box {
+		text-align: center;
+}
+
+.responsive-table {
+		overflow-x: auto;
 }
 
 .error {

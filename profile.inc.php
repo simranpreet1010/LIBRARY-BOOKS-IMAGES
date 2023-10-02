@@ -80,7 +80,6 @@
 								<form action='include/db/return.inc.php' method='POST'>
 									<label for='bookID'>Enter Book ID:</label>
 									<input type='text' name='bookID' required>
-									<input type='hidden' name='dueDate' value='".date('Y-m-d', strtotime('-2 weeks'))."'>
 									<input type='submit' name='btnReturn' value='Return'>
 								</form>
 								

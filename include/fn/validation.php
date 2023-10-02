@@ -288,7 +288,8 @@
          function returnBook($conn) {
             // Get data from the form submission
             $bookID = $_REQUEST['bookID'];
-            $dueDate = $_REQUEST['dueDate'];
+            session_start();
+            $_SESSION['bookID'] = $bookID;
 
             // Check if the book is borrowed by the user
             $checkBorrowQuery = "SELECT * FROM tblborrowbooks WHERE bookID = $bookID AND returnDate IS NULL";
@@ -301,6 +302,9 @@
 
                 // Update the return date to the current date
                 $returnDate = date('Y-m-d');
+                $_SESSION['returnDate'] = $returnDate;
+                $row = mysqli_fetch_assoc($result);
+                $dueDate = $row['dueDate'];
 
 
                 if (!($returnDate > $dueDate)) {

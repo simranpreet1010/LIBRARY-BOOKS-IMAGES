@@ -44,7 +44,7 @@
 				if (isset($_SESSION["id"])) {
 					$tblName = "library";
 					$result = displayCatalog($conn, $tblName);
-					echo "<table border>
+					echo "<div class='responsive-table'><table border>
 							<thead>
 								<tr>
 									<th>Book ID</th>
@@ -83,13 +83,13 @@
 							echo "<tr><th colspan='6'>0 results</th></tr>";
 						}
 					}
-					echo "</table>";
+					echo "</table></div>";
 					if (isset($_SESSION["stock"])) {
 						if ($_SESSION["stock"]> 0) {
 							echo "<form action='include/db/borrow.inc.php' method='POST'>
 							<input type='hidden' name='bookID' value='" . $_SESSION["bookID"] . "'>
 							<input type='hidden' name='studentID' value='" . $_SESSION["id"] . "'>
-							<input type='submit' name='btnBorrow' value='Borrow'>
+							<div class='align-center'><input type='submit' name='btnBorrow' value='Borrow'></div>
 							</form>";
 							if(isset($_REQUEST["msg"])) {
 								

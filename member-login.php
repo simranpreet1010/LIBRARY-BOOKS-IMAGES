@@ -34,9 +34,9 @@
 							</div>
 							<div class="input-row">
 								<input type="submit" name="btnLogin" value="Login">
-								<div class="sub-row">
+								<!--div class="sub-row">
 									<a href="#">Forgot Password?</a>
-								</div>
+								</div-->
 							</div>
 						</form>
 						<?php
