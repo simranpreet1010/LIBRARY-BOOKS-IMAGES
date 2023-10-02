@@ -23,6 +23,16 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `dbwinlibrary` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `dbwinlibrary`;
 
+-- Create a user
+create user ASAR@'localhost' IDENTIFIED BY 'winlibrary@2023';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER
+	ON *.*
+	TO 'ASAR'@'localhost'
+	; 
+
+  
+
 -- --------------------------------------------------------
 
 --
